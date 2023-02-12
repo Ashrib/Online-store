@@ -80,7 +80,7 @@
   flex-direction: column;
   gap: 2px;
   overflow: scroll;
-  height: clamp(0px,100px,100px);
+  height: clamp(0px,130px,130px);
 }
 .categ{
   border: 1px solid rgb(48, 239, 0);

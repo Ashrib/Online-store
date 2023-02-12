@@ -15,7 +15,9 @@ import {BsFillCameraFill} from "react-icons/bs"
 import {FaUserAlt} from "react-icons/fa"
 import {FaHome} from "react-icons/fa"
 import {FaCartPlus} from "react-icons/fa"
+import {MdOutlineKeyboardBackspace} from "react-icons/md"
 import {AiOutlineCheck} from "react-icons/ai"
+import {IoArrowBack} from "react-icons/io"
 import {CgProfile} from "react-icons/cg"
 import Dropdown from 'react-bootstrap/Dropdown';
 import { set } from 'mongoose';
@@ -146,13 +148,15 @@ e.preventDefault();
             </div>
         </div>
     <div className='body-div'>
-        <span><Link to="/">home</Link></span>
+        <span style={{fontSize:"1.7em"}}>
+            <Link to="/"><MdOutlineKeyboardBackspace title='home'/></Link>
+        </span>
         <div className="head">
             Settings
         </div>
         <div className="body">
             <div className="user-image">
-             <img src={(state?.user?.profileImage !== "")?state.user.profileImage:'https://www.pngitem.com/middle/mmhwxw_transparent-user-png-default-user-image-png-png/'} alt="ww" />
+             <img src={(state?.user?.profileImage !== "")?state.user.profileImage:`https://www.pngitem.com/middle/mmhwxw_transparent-user-png-default-user-image-png-png/`} alt="ww" />
             </div>
             <div id='name-update'>
                 <input type="text" placeholder='Update Full Name'
