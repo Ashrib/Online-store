@@ -10,7 +10,7 @@ import {
     stringToHash,
     varifyHash,
 } from "bcrypt-inzi"
-import { userModel,otpModel,tweetModel } from './routes/dbmodels.mjs'
+import { userModel,otpModel,productModel } from './routes/dbmodels.mjs'
 import sgMail from "@sendgrid/mail"
 
 
@@ -155,7 +155,7 @@ app.post("/api/v1/updateProfileImg", async (req, res) =>{
         if (!user && !userTweets) throw new Error("User not found")
         
         await userModel.updateOne({ _id: _id }, { profileImage: profileImage }).exec()
-        await tweetModel.updateMany({ email: email }, { profilePhoto: profileImage }).exec()
+        await productModel.updateMany({ email: email }, { profilePhoto: profileImage }).exec()
 
         res.send({
             message: "profile image changed success",

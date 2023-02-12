@@ -21,16 +21,17 @@
   top: 0;
   min-height: calc(100vh);
 }
-.navbar{
+.nav-bar{
   display: flex;
   align-items: center;
-  background-color: rgb(239, 23, 23);
+  background-color: rgb(255, 52, 52);
   height: 80px;
   width: 100%;
 }
 .user-info{
   display: flex;
   gap: 10px;
+  /* background-color: aqua; */
 }
 .prf-img{
   border: 1px solid white;
@@ -50,6 +51,13 @@
   text-transform: capitalize;
 }
 
+.structure, .structure>form{
+  display: flex;
+  flex-direction: column;
+}
+.form-inp{
+  display: flex
+}
 .error{
   display: none;
   font-size: 0.7em;

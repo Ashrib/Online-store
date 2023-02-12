@@ -1,20 +1,17 @@
 import mongoose from "mongoose"
 
 
-let twitterSchema = new mongoose.Schema({
-    text: {type:String, required: true},
+let productSchema = new mongoose.Schema({
+    name: {type:String, required: true},
+    description: {type:String, required: true},
     createdOn: { type: Date, default: Date.now },
-    owner: { type: mongoose.ObjectId, required: true },
-    isDeleted: { type: Boolean, default: false },
     image: { type: String },
-    ownerName:{ type: String },
-    profilePhoto: { type: String },
-    userFirstName: {type:String},
-    userLastName: {type:String},
-    email:{type:String}
-
+    price: {type:Number,required: true},
+    unit: {type:String,required: true},
+    category: {type:String,required: true},
+    
 });
-export const tweetModel = mongoose.model('Tweets', twitterSchema);
+export const productModel = mongoose.model('storeProducts', productSchema);
 
 const userSchema = new mongoose.Schema({
     firstName: { type: String },

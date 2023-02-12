@@ -1,14 +1,18 @@
 import express from 'express';
-import {tweetModel } from './dbmodels.mjs'
+import {productModel } from './dbmodels.mjs'
 import mongoose from 'mongoose';
 
 const router = express.Router()
 
-router.post('/tweet', (req, res) => {
+router.post('/product', (req, res) => {
     const body = req.body;
    
   if ( // validation
-      !body.text
+      !body.name||
+      !body.price||
+      !body.unit||
+      !body.category||
+      !body.image
       
   ) {
       res.status(400).send({
@@ -19,20 +23,19 @@ router.post('/tweet', (req, res) => {
 
   console.log(body)
 
-    tweetModel.create({
-        text:body.text,
-        image:body.image,
-        profilePhoto:body.profilePhoto,
-        userFirstName:body.userFirstName,
-        userLastName:body.userLastName,
-        email:body.email,
-        owner: new mongoose.Types.ObjectId(body.token._id)
+    productModel.create({
+        name: body.name,
+        createdOn: body.createdOn,
+        price: body.price,
+        unit: body.unit,
+        category: body.category,
+        image:body.image ,
     },
         (err, saved) => {
             if (!err) {
                 console.log(saved);
                 res.send({
-                    message: "Tweet posted successfully"
+                    message: "Item posted successfully"
                 });
             } else {
                 res.status(500).send({
@@ -43,10 +46,10 @@ router.post('/tweet', (req, res) => {
 
 })
 
-router.get('/tweets', (req, res) => {
+router.get('/products', (req, res) => {
     const userId = new mongoose.Types.ObjectId(req.body.token._id);
 
-    tweetModel.find(
+    productModel.find(
         { owner: userId },
         {},
         {
@@ -74,10 +77,10 @@ router.get('/tweets', (req, res) => {
  
 })
 
-router.get('/tweetFeed', (req, res) => {
+router.get('/productFeed', (req, res) => {
     const page = req.query.page || 0
 
-    tweetModel.find(
+    productModel.find(
         { isDeleted: false },
         {},
         {
@@ -104,20 +107,20 @@ router.get('/tweetFeed', (req, res) => {
         });
 })
 
-router.get('/tweet/:id', (req, res) => {
+router.get('/product/:id', (req, res) => {
 
     const id = req.params.id;
 
-    tweetModel.findOne({ _id: id }, (err, data) => {
+    productModel.findOne({ _id: id }, (err, data) => {
         if (!err) {
             if (data) {
                 res.send({
-                    message: `Get tweet by id: ${data._id} success`,
+                    message: `Get item by id: ${data._id} success`,
                     data: data
                 });
             } else {
                 res.status(404).send({
-                    message: "Tweet not found",
+                    message: "item not found",
                 })
             }
         } else {
@@ -128,9 +131,9 @@ router.get('/tweet/:id', (req, res) => {
     });
 })
 
-router.delete('/tweet/:ids', (req, res) => {
+router.delete('/product/:ids', (req, res) => {
     const id =req.params.ids;
-    tweetModel.deleteOne({
+    productModel.deleteOne({
         _id: id,
         owner: new mongoose.Types.ObjectId(req.body.token._id)
 
@@ -159,7 +162,7 @@ router.delete('/tweet/:ids', (req, res) => {
     
 })
 
-router.put('/tweet/:editId', async (req, res) => {
+router.put('/product/:editId', async (req, res) => {
 
     const body = req.body;
     const id = req.params.editId;
@@ -175,7 +178,7 @@ router.put('/tweet/:editId', async (req, res) => {
     }
 
     try {
-        let data = await tweetModel.findByIdAndUpdate(id,
+        let data = await productModel.findByIdAndUpdate(id,
             {
                 text: body.text,
               
@@ -186,7 +189,7 @@ router.put('/tweet/:editId', async (req, res) => {
         console.log('updated: ', data);
 
         res.send({
-            message: "Tweet modified successfully"
+            message: "product modified successfully"
         });
 
     } catch (error) {
