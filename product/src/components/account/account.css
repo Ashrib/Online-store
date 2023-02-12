@@ -1,0 +1,70 @@
+.main{
+    display: flex;
+    flex-direction: column;
+    padding: 0%;
+    height: calc(100vh);
+    width: calc(100vw);
+  }
+  .spinner-div{
+    position: absolute;
+    z-index: 2;
+    background-color: rgba(0, 0, 0, 0.171);
+    height: calc(100vh);
+    width: calc(100vw);
+    display: none;
+    top: 0;
+  }
+  .spinner{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    top: 0;
+    min-height: calc(100vh);
+}
+.body-div{
+    display: flex;
+    border: 2px solid rgb(48, 239, 0);
+    margin: 10px;
+    border-radius: 15px;
+    flex-direction: column;
+  }
+  .head{
+    text-align: center;
+    width: 100%;
+    font-size: 1.3em;
+    font-weight: 700;
+  }
+  .body{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .user-image{
+    border-radius: 50%;
+    height: 60px;
+    width: 60px;
+    border: 1px solid gray;
+    padding: 2px;
+  }
+  .user-image>img{
+    border-radius: inherit;
+  }
+  #name-update>input{
+    background-color: transparent;
+    border: none;
+    border-bottom: 1px solid rgb(120, 120, 120);
+  }
+  #name-update>input::placeholder{
+    color: rgb(120, 120, 120);
+  }
+  #img-update{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+  .center-div{
+    width: clamp(230px,80%,600px);
+    background-color: rgb(234, 34, 34);
+  }
+
+  

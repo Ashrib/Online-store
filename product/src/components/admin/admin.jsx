@@ -6,7 +6,7 @@ import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import Spinner from 'react-bootstrap/Spinner';
 import {useRef,useContext} from 'react';
-import {useNavigate} from "react-router-dom"
+import {useNavigate,Link} from "react-router-dom"
 import { GlobalContext } from '../../context/context';
 import { storage } from '../../firebase';
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
@@ -215,7 +215,7 @@ function Admin() {
     </div>
     <div className="options">
       <div className="opt">
-        <CgProfile className='icon' title='account'/>
+        <Link to="/Account"><CgProfile className='icon' title='account'/></Link>
       </div>
       <div className="opt">
        <AiOutlineProfile className='icon' title='add product' onClick={handleShow}/>

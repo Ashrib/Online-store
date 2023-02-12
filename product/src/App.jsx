@@ -2,6 +2,7 @@ import './App.css';
 import {Route,Routes,Link,Navigate} from "react-router-dom"
 import Admin from "./components/admin/admin"
 import Home from "./components/home/home"
+import Account from "./components/account/account"
 import Login from "./components/login/login"
 import Signup from "./components/signup/signup"
 import {useState,useEffect,useContext} from "react"
@@ -112,6 +113,7 @@ function App() {
               <Route path="/login" element={<Login />} />
               <Route path="/signup" element={<Signup />} />
               <Route path="/Profile" element={<Profile />} />
+              <Route path="/Account" element={<Account />} />
               <Route path="/update-password" element={<UpdatePassword />} />
 
             </Routes>   
