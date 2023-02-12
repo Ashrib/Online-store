@@ -46,10 +46,20 @@ function Login() {
             console.log(response);
             event.target.reset();
             window.location.reload();
-            dispatch({
-              type: 'USER_LOGIN',
-              payload: response.data.profile
-            })
+
+            if(email === "admin@gmail.com"){
+
+              dispatch({
+                type: 'ADMIN_LOGIN',
+                payload: response.data.profile
+              })
+            }
+            else{
+              dispatch({
+                type: 'USER_LOGIN',
+                payload: response.data.profile
+              })
+            }
 
       
           }, (error) => {

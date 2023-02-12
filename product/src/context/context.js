@@ -5,7 +5,7 @@ export const GlobalContext = createContext("Initial Value");
 
 let data = {
   isLogin: null,
-  isAdmin: false,
+  isAdmin: null,
   user:{}
 }
 

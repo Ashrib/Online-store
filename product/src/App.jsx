@@ -1,5 +1,6 @@
 import './App.css';
 import {Route,Routes,Link,Navigate} from "react-router-dom"
+import Admin from "./components/admin/admin"
 import Home from "./components/home/home"
 import Login from "./components/login/login"
 import Signup from "./components/signup/signup"
@@ -38,10 +39,20 @@ function App() {
           withCredentials: true
         })
         console.log("Profile: ", response);
-        dispatch({
-          type: 'USER_LOGIN',
-          payload:response.data
-        })
+       
+        if(response.data.email === "admin@gmail.com"){
+
+          dispatch({
+            type: 'ADMIN_LOGIN',
+            payload: response.data
+          })
+        }
+        else{
+          dispatch({
+            type: 'USER_LOGIN',
+            payload:response.data
+          })
+        }
       } catch (error) {
 
         console.log("axios error: ", error);
@@ -93,13 +104,21 @@ function App() {
 
   return (
     <div>
-       {/* {(state.isLogin == false)?
-
-         :
-         null
-        }   */}
 
          {
+         ( state?.isAdmin === true &&state?.isLogin === null) ?
+            <Routes>
+              <Route path="/" element={<Admin />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/signup" element={<Signup />} />
+              <Route path="/Profile" element={<Profile />} />
+              <Route path="/update-password" element={<UpdatePassword />} />
+
+            </Routes>   
+          :
+            null
+        } 
+        {
          (state?.isLogin === true) ?
             <Routes>
               <Route path="/" element={<Home />} />
@@ -108,10 +127,6 @@ function App() {
               <Route path="/Profile" element={<Profile />} />
               <Route path="/update-password" element={<UpdatePassword />} />
 
-
-
-
-
             </Routes>   
           :
             null
@@ -119,7 +134,7 @@ function App() {
 
 
         {    
-         (state.isLogin === false) ?
+         (state.isLogin === false && state?.isAdmin === false) ?
 
             <Routes>
               <Route path="/" element={<Login />} />
@@ -128,11 +143,6 @@ function App() {
               <Route path="*" element={<Login/>}/>
               <Route path="/forget-pass-with-sms" element={<ForgetPassWithSms />} />
 
-
-
-
-              
-
             </Routes>   
           :
             null
@@ -140,13 +150,12 @@ function App() {
          
 
          { 
-         (state.isLogin === null) ?
+
+         (state.isLogin === null && state.isAdmin === null) ?
           <div className='loadingScreen'>
               <Spinner animation="border" variant="danger" />
                 <p>Loading...</p>
-
           
-            
           </div>
            
           :

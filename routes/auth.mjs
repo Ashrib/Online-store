@@ -105,6 +105,12 @@ router.post("/login", (req, res) => {
         return;
     }
 
+    //Check if admin exist
+    // if(body.email === "admin@gmail.com"){
+    
+    // }
+
+    // else{
     // check if user exist
     userModel.findOne(
         { email: body.email },
@@ -112,46 +118,6 @@ router.post("/login", (req, res) => {
         (err, data) => {
             if (!err) {
                 console.log("data: ", data);
-
-                if (body.email === "ali@gmail.com") {
-                    userModel.updateOne({ email: "ali@gmail.com" }, { isAdmin: true }).exec()
-
-                    const token = jwt.sign({
-                        _id: data._id,
-                        email: data.email,
-                        iat: Math.floor(Date.now() / 1000) - 30,
-                        exp: Math.floor(Date.now() / 1000) + (60 * 60 * 24),
-                    }, SECRET);
-
-                    console.log("token: ", token);
-
-                    res.cookie('Token', token, {
-                        maxAge: 86_400_000,
-                        httpOnly: true,
-                        sameSite:"none",
-                        secure:true,
-                        
-                    });
-                    res.send({
-                        message: "Admin login successful",
-                        profile: {
-                            email: data.email,
-                            firstName: data.firstName,
-                            lastName: data.lastName,
-                            _id: data._id,
-                            profileImage:data.profileImage
-                        }
-                    });
-
-                    return   
-                }
-                
-                else { // user not already exist
-                    console.log("user not found");
-                    res.status(401).send({ message: "Incorrect email or password" });
-                
-                };
-
 
                 if (data) { // user found
                     varifyHash(body.password, data.password).then(isMatched => {
@@ -178,8 +144,6 @@ router.post("/login", (req, res) => {
                             });
 
                           
-                           
-                    
                             res.send({
                                 message: "login successful",
                                 profile: {
@@ -209,6 +173,7 @@ router.post("/login", (req, res) => {
                 return;
             }
         })
+    // }
 })
 
 
@@ -247,50 +212,6 @@ router.post('/forget-password', async (req, res) => {
             otp: otpHash,
             email: body.email, 
         });
-
-        // TODO: send otp via email //sendGrid 
-        // const msg = {
-        //     to: body.email, // Change to your recipient
-        //     from: 'cocobutter128@gmail.com', // Change to your verified sender
-        //     subject: 'Verify your OTP',
-        //     text: OTP,
-        //     html: `<strong>${OTP}</strong>`,
-        //   }
-        //   sgMail
-        //     .send(msg)
-        //     .then(() => {
-        //       console.log('Email sent')
-        //       res.send({
-        //         message: "OTP sent success"
-        //     });
-
-         
-        //     })
-        //     .catch((error) => {
-        //       console.error(error)
-        //     })
-
-        // TODO: send otp via email // postmark
-        // let serverToken = "a2e7934d-5a2b-4ba8-9fd6-19daeb9e6d4c";
-        // let client = new postmark.ServerClient(serverToken);
-
-        // client.sendEmail({
-        //     "From": "c1h1r6@ebarg.net",
-        //     "To": "c1h1r6@ebarg.net",
-        //     "Subject": "Verify your OTP",
-        //     "TextBody": OTP
-        //     })  
-        //         .then(() => {
-        //             console.log('Email sent')
-        //             res.send({
-        //                 message: "OTP sent success"
-        //             });
-        //         })
-        //         .catch((error) => {
-        //             console.error(error)
-        //         });
-
-        
 
          // TODO: send otp via email // malijet
          const mailjet = Mailjet.apiConnect(
@@ -380,33 +301,6 @@ router.post('/forget-password-via-sms', async (req, res) => {
             email: body.email, 
             number:body.number
         });
-
-    
-         // TODO: send otp via sms // malijet
-//          const mailjet = Mailjet.smsConnect("b34352494fa04346a919d7fcd7419e9e", {
-//             config: {
-//               version: 'v4'
-//             }
-//           });
-        
-//           const request = mailjet
-//           .post('sms-send')
-//           .request({
-//             Text: `Hey${user.firstName, user.lastName}! Please verify your OTP`,
-//             To: body.number,
-//             From: "Twitter Admin"
-//           })
-  
-//   request
-//           .then((result) => {
-//             console.log(result.body)
-//             res.send({
-//                 message: "OTP sent success"
-//              });
-//           })
-//           .catch((err) => {
-//             console.log(err.statusCode)
-//           })
 
     
         return;
