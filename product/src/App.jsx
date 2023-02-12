@@ -121,7 +121,7 @@ function App() {
             null
         } 
         {
-         (state?.isLogin === true) ?
+         (state?.isLogin === true && state?.isAdmin === null) ?
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/login" element={<Login />} />
