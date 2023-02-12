@@ -31,7 +31,7 @@
   .head{
     text-align: center;
     width: 100%;
-    font-size: 1.3em;
+    font-size: 1.2em;
     font-weight: 700;
   }
   .body{
@@ -67,7 +67,6 @@
     width: 100%;
   }
   #center-div{
-    border-bottom: 1px solid rgb(255, 3, 3);
     width: clamp(200px,90%,500px);
     /* background-color: rgb(234, 34, 34); */
   }
@@ -76,4 +75,16 @@
   justify-content: center;
   display: flex;
 }
-  
+.category-box{
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  overflow: scroll;
+  height: clamp(0px,100px,100px);
+}
+.categ{
+  border: 1px solid rgb(48, 239, 0);
+  border-radius: 10px;
+  padding: 3px 0px;
+  text-align: center;
+}

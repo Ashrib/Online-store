@@ -7,6 +7,9 @@ export const reducer = (state, action) => {
       case "ADMIN_LOGIN": {
         return { ...state, isAdmin:true, user:action.payload } 
       }
+      case "ADMIN_LOGOUT": {
+        return { ...state, isAdmin:false, isLogin: false } // set this to null on purpose, do not change
+      }
       case "USER_LOGOUT": {
         return { ...state, isAdmin:false, isLogin: false } // set this to null on purpose, do not change
       }

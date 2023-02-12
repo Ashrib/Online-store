@@ -108,9 +108,35 @@ e.preventDefault();
     }
   }
 
+  
+  const logoutHandler = () =>{
+    axios.get(`${baseUrl}/api/v1/logout`,{
+      withCredentials: true
+    })
+
+    .then((response) => {
+      console.log(response);
+      setIsSpinner(true)
+      setTimeout(() => {
+        setIsSpinner(false);
+        dispatch({
+          type: 'ADMIN_LOGOUT',
+          payload: null
+      })
+    }, 2500);
+      
+    }, (error) => {
+      console.log(error);
+    });
+
+    
+  }
+
+
+
   useEffect(() => {
     getCategories()
-  },[])
+  },[setAddCategory])
 
     return (
 <div className='main'>
@@ -120,7 +146,7 @@ e.preventDefault();
             </div>
         </div>
     <div className='body-div'>
-        <p><Link to="/">home</Link></p>
+        <span><Link to="/">home</Link></span>
         <div className="head">
             Settings
         </div>
@@ -157,8 +183,15 @@ e.preventDefault();
                 <div className="category-add">
                     <span className='head'>All Categories</span>
                     <div className="category-box">
-                    
+                    {(allCategories.length !== 0)?
+                    allCategories.map((category,i)=>(
+                        <div className='categ' key={i}>{category.name}</div>
+                    ))
+                    :null}
                     </div>
+                </div>
+                <div style={{width:'100%',textAlign:'center'}}>
+                    <Button onClick={logoutHandler} variant="outline-success">Logout</Button>
                 </div>
             </div>
         </div>
