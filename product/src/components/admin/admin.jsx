@@ -214,7 +214,11 @@ function Admin() {
       </div>
     </div>
     <div className="options">
-      Add <AiOutlineProfile title='add product' onClick={handleShow}/>
+      <div className="opt">
+        <CgProfile className='icon' title='account'/>
+      </div>
+      <div className="opt">
+       <AiOutlineProfile className='icon' title='add product' onClick={handleShow}/>
       <Modal
         show={show}
         onHide={handleClose}
@@ -229,12 +233,13 @@ function Admin() {
           <div className="structure">
             <form onSubmit={submitHandler}>
               <label htmlFor="pro-img-inp">
-              <AiOutlinePlusCircle/>
-              </label>
+              <div id='img-inp' >
+              Upload <AiOutlinePlusCircle/>
               <input required type='file'style={{display:"none"}}
-               name='item-img' accept='image/png, image/jpg, image.jpeg'  id='pro-img-inp'
+               name='item-img' accept='image/png'  id='pro-img-inp'
                onChange={(e) =>setImageUpload(e.target.files[0])}
-               />
+               /></div>
+              </label>
                <input type="text" placeholder='Enter item name' required
                onChange={(e) =>setItemName(e.target.value)} 
                />
@@ -266,9 +271,37 @@ function Admin() {
           <Button variant="secondary" onClick={handleClose}>
             Close
           </Button>
-          <Button variant="primary">Understood</Button>
         </Modal.Footer>
       </Modal>
+      </div>
+    </div>
+  </div>
+  <div className="body-div">
+    <div className="get-products">
+      <span style={{fontSize:'1.3em',fontWeight:'bold'}}>All Products</span>
+      <div className="products-box">
+        {(allData.length !== 0)?
+
+          allData.map((eachProduct,i) =>(
+            <div className='product' key={i}>
+
+              <img className='item-img' src={eachProduct.image} alt="product img" />
+              <div>
+              <span style={{fontSize:'1em',color:"rgb(48, 239, 0)", textTransform:"capitalize"}}
+              >{eachProduct.name}</span>
+              <br />
+              <span style={{fontSize:'0.8em',color:"#444444", textTransform:"capitalize"}}
+              >{eachProduct.unit}</span>
+
+              </div>
+              <p style={{fontSize:'0.9em',color:"#444444",marginLeft:"auto",paddingRight:'5px'}}
+              >Rs.{eachProduct.price}</p>
+            </div>
+          ))
+         
+        :null}
+      </div>
+        
     </div>
   </div>
 </div>
