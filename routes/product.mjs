@@ -25,9 +25,9 @@ router.post('/product', (req, res) => {
 
     productModel.create({
         name: body.name,
-        createdOn: body.createdOn,
         price: body.price,
         unit: body.unit,
+        description: body.description,
         category: body.category,
         image:body.image ,
     },
@@ -47,33 +47,18 @@ router.post('/product', (req, res) => {
 })
 
 router.get('/products', (req, res) => {
-    const userId = new mongoose.Types.ObjectId(req.body.token._id);
-
-    productModel.find(
-        { owner: userId },
-        {},
-        {
-            sort: { "_id": -1 },
-            limit: 50,
-            skip: 0,
-            populate:
-            {
-                path: "owner",
-                select: 'firstName lastName email profileImage'
-            }
+    productModel.find({}, (err, data) => {
+        if (!err) {
+            res.send({
+                message: "got all products successfully",
+                data: data
+            })
+        } else {
+            res.status(500).send({
+                message: "server error"
+            })
         }
-        , (err, data) => {
-            if (!err) {
-                res.send({
-                    message: "got all tweets successfully",
-                    data: data
-                })
-            } else {
-                res.status(500).send({
-                    message: "server error"
-                })
-            }
-        });
+    });
  
 })
 

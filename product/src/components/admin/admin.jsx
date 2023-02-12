@@ -127,15 +127,12 @@ function Admin() {
     
   // }
 
-  const allTweetsHandler= async ()=>{
-    if (eof) return;
+  const allProductsHandler = async ()=>{
         try {
-            const response = await axios.get(`${baseUrl}/api/v1/productFeed?page=${allData.length}`)
+            const response = await axios.get(`${baseUrl}/api/v1/products`)
+            console.log("all products", response.data);
 
-           
-
-
-setAllData(response.data.data)
+        setAllData(response.data.data)
         } catch (error) {
             console.log("error in getting all products", error);
         }
@@ -143,20 +140,8 @@ setAllData(response.data.data)
 
   
   useEffect(() => {
-    allTweetsHandler()
+    allProductsHandler()
   },[loadTweet])
-
-  const getProductHandlerOnId = () =>{
-    setShow1(true)
-    axios.get(`${baseUrl}/api/v1/product/${searchId}`,{withCredentials: true})
-    .then((response) => {
-      console.log(response);
-      setSearchData(response.data.data)
-
-    }, (error) => {
-      console.log(error);
-    });
-  }
 
   let descEmptyError = document.querySelector(".descEmptyError")
   let descError = document.querySelector(".descLengthError")
