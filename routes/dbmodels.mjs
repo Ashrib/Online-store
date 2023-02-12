@@ -13,6 +13,11 @@ let productSchema = new mongoose.Schema({
 });
 export const productModel = mongoose.model('storeProducts', productSchema);
 
+const categorySchema = new mongoose.Schema({
+    name: { type: String, required: true },
+});
+export const categoryModel = mongoose.model('Categories', categorySchema);
+
 const userSchema = new mongoose.Schema({
     firstName: { type: String },
     lastName: { type: String },

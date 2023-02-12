@@ -1,5 +1,5 @@
 import express from 'express';
-import {productModel } from './dbmodels.mjs'
+import {productModel ,categoryModel} from './dbmodels.mjs'
 import mongoose from 'mongoose';
 
 const router = express.Router()
@@ -60,6 +60,73 @@ router.get('/products', (req, res) => {
         }
     });
  
+})
+//category
+router.get('/categories', (req, res) => {
+    categoryModel.find({}, (err, data) => {
+        if (!err) {
+            res.send({
+                message: "got all categories successfully",
+                data: data
+            })
+        } else {
+            res.status(500).send({
+                message: "server error"
+            })
+        }
+    });
+ 
+})
+
+router.post('/category', (req, res) => {
+    const body = req.body;
+   
+  if ( // validation
+      !body.category
+       
+  ) {
+      res.status(400).send({
+          message: "required parameters missing",
+      });
+      return;
+  }
+
+  console.log("cat body",body)
+
+  categoryModel.findOne({ name: body.category }, (err, category) => {
+    if (!err) {
+        console.log("category: ", category);
+
+        if (category) { // category already exist
+            console.log("category already exist: ", category);
+            res.status(400).send({ message: "category already exist, Please try a different name" });
+            return;
+        }
+
+        else{
+            categoryModel.create({
+                name:body.category
+            
+            },
+                (err, saved) => {
+                    if (!err) {
+                        console.log(saved);
+                        res.send({
+                            message: "Category posted successfully"
+                        });
+                    } else {
+                        res.status(500).send({
+                            message: "server error"
+                        })
+                    }
+                })
+
+        }
+    }
+
+   
+
+})
 })
 
 router.get('/productFeed', (req, res) => {

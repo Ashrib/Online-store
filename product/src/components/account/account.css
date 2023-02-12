@@ -48,6 +48,8 @@
   }
   .user-image>img{
     border-radius: inherit;
+    height: 100%;
+    width: 100%;
   }
   #name-update>input{
     background-color: transparent;
@@ -58,13 +60,20 @@
     color: rgb(120, 120, 120);
   }
   #img-update{
-    width: 100%;
     display: flex;
     justify-content: center;
   }
-  .center-div{
-    width: clamp(230px,80%,600px);
-    background-color: rgb(234, 34, 34);
+  #img-update>form{
+    width: 100%;
   }
-
+  #center-div{
+    border-bottom: 1px solid rgb(255, 3, 3);
+    width: clamp(200px,90%,500px);
+    /* background-color: rgb(234, 34, 34); */
+  }
+.add-cate,.add-cate>form{
+  width: 100%;
+  justify-content: center;
+  display: flex;
+}
   
