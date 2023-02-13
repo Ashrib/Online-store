@@ -53,6 +53,10 @@ function App() {
             type: 'USER_LOGIN',
             payload:response.data
           })
+          dispatch({
+            type: 'ADMIN_LOGIN',
+            payload:response.data
+          })
         }
       } catch (error) {
 
@@ -92,6 +96,9 @@ function App() {
       if (error.response.status === 401) {
         dispatch({
           type: 'USER_LOGOUT'
+        })
+        dispatch({
+          type: 'ADMIN_LOGOUT'
         })
       }
       return Promise.reject(error);
