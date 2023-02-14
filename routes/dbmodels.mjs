@@ -19,8 +19,7 @@ const categorySchema = new mongoose.Schema({
 export const categoryModel = mongoose.model('Categories', categorySchema);
 
 const userSchema = new mongoose.Schema({
-    firstName: { type: String },
-    lastName: { type: String },
+    fullName: { type: String, required: true  },
     email: { type: String, required: true },
     password: { type: String, required: true },
     profileImage:{type:String},
@@ -28,7 +27,7 @@ const userSchema = new mongoose.Schema({
     createdOn: { type: Date, default: Date.now },
 
 });
-export const userModel = mongoose.model('Users', userSchema);
+export const userModel = mongoose.model('StoreUsers', userSchema);
 
 const otpSchema = new mongoose.Schema({
     otp: String,

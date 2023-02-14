@@ -25,10 +25,11 @@
 .nav-bar{
   display: flex;
   align-items: center;
-  background-color: rgb(48, 239, 0);
+  border-bottom:2px solid #5cdb35;
   height: 80px;
   width: 100%;
   justify-content: space-between;
+  padding: 0px 10px;
 }
 .user-info{
   display: flex;
@@ -50,8 +51,11 @@
 }
 .cap-text{
   text-transform: capitalize;
+  color: #5cdb35;
 }
-
+.icon{
+  color: #5cdb35;
+}
 .structure, .structure>form{
   display: flex;
   flex-direction: column;
@@ -83,10 +87,9 @@
   font-size: 1.5em;
   cursor: pointer;
 }
-.icon:hover{
-  font-size: 1.5em;
-  box-shadow: 0px 10px 10px red;
-}
+/* .icon:hover{
+  box-shadow: 0px 0px 10px #5cdb3564;
+} */
 .error{
   display: none;
   font-size: 0.7em;
@@ -94,10 +97,6 @@
   padding-left: 10px;
   color: red;
 }
-/* .tweet-info>div{
-  display: flex;
-  flex-direction: column;
-} */
 .username{
   text-transform: capitalize;
   font-weight: 600;
@@ -106,13 +105,7 @@
   padding-top: 0px;
   font-size: 0.8em;
 }
-.tweet-content{
-  padding: 0px 6%;
-}
-.tweet-txt{
-  color: black;
-  font-weight: normal;
-}
+
 .tweet-content img{
   -ms-transform: translateZ(0); /* IE 9 */
   -webkit-transform: translateZ(0); /* Chrome, Safari, Opera */
@@ -138,13 +131,13 @@
 .products-box{
   display: flex;
   flex-direction: column;
-  overflow: scroll;
+  overflow-y: scroll;
   width: 100%;
   gap: 8px;
 }
 .product{
   display: flex;
-  border: 2px solid rgb(48, 239, 0);
+  border: 2px solid #5cdb35;
   height: 80px;
   width: 100%;
   border-radius: 10px;

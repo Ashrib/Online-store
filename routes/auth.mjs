@@ -26,16 +26,14 @@ router.post("/signup", (req, res) => {
 
     let body = req.body;
 
-    if (!body.firstName
-        || !body.lastName
+    if (!body.fullName
         || !body.email
         || !body.password
     ) {
         res.status(400).send(
             `required fields missing, request example: 
                 {
-                    "firstName": "John",
-                    "lastName": "Doe",
+                    "fullName": "John Doe",
                     "email": "abc@abc.com",
                     "password": "12345"
                 }`
@@ -61,8 +59,7 @@ router.post("/signup", (req, res) => {
                 stringToHash(body.password).then(hashString => {
 
                     userModel.create({
-                        firstName: body.firstName,
-                        lastName: body.lastName,
+                        fullName: body.fullName,
                         email: body.email,
                         profileImage:body?.profileImage,
                         password: hashString

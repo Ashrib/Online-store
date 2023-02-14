@@ -36,6 +36,7 @@ function Admin() {
 
   const [data,setData] =useState ("") 
   const [allData,setAllData] =useState ([]) 
+  const [allCategories,setAllCategories] =useState ([]) 
   const [show, setShow] = useState(false);
   const [editId,setEditId] =useState (null) 
   const [searchId,setSearchId] =useState (null) 
@@ -60,8 +61,6 @@ function Admin() {
 
 
   // add modal
-  // const [show, setShow] = useState(false);
-
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true)
   // ===
@@ -126,7 +125,7 @@ function Admin() {
     
     
   // }
-
+// getting all products
   const allProductsHandler = async ()=>{
         try {
             const response = await axios.get(`${baseUrl}/api/v1/products`)
@@ -137,10 +136,21 @@ function Admin() {
             console.log("error in getting all products", error);
         }
   }
+  // getting all categories
+  const allCategoriesHandler = async ()=>{
+    try {
+        const response = await axios.get(`${baseUrl}/api/v1/categories`)
+        console.log("all categories", response.data);
 
+        setAllCategories(response.data.data)
+    } catch (error) {
+        console.log("error in getting all categories", error);
+    }
+}
   
   useEffect(() => {
-    allProductsHandler()
+    allProductsHandler();
+    allCategoriesHandler();
   },[loadTweet])
 
   let descEmptyError = document.querySelector(".descEmptyError")
@@ -210,12 +220,14 @@ function Admin() {
       </div>
       <div className="user-data">
          <span className='cap-text'>{state?.user?.firstName} {state?.user?.lastName}</span>
-         <span>{state?.user?.email}</span>
+         <span style={{fontSize:"0.9em"}}>{state?.user?.email}</span>
       </div>
     </div>
     <div className="options">
       <div className="opt">
-        <Link to="/Account"><CgProfile className='icon' title='account'/></Link>
+        <Link to="/Account">
+          <CgProfile className='icon' title='account'/>
+        </Link>
       </div>
       <div className="opt">
        <AiOutlineProfile className='icon' title='add product' onClick={handleShow}/>
@@ -287,7 +299,7 @@ function Admin() {
 
               <img className='item-img' src={eachProduct.image} alt="product img" />
               <div>
-              <span style={{fontSize:'1em',color:"rgb(48, 239, 0)", textTransform:"capitalize"}}
+              <span style={{fontSize:'1em',color:"#5cdb35", textTransform:"capitalize"}}
               >{eachProduct.name}</span>
               <br />
               <span style={{fontSize:'0.8em',color:"#444444", textTransform:"capitalize"}}

@@ -25,15 +25,12 @@ function Signup() {
     const thirdRef = useRef(null);
     const fourthRef = useRef(null);
     const fifthRef = useRef(null);
-    const [firstName,setFirstName] =useState ("") 
-    const [lastName,setLastName] =useState ("") 
+    const [fullName,setFullName] =useState ("") 
     const [email,setEmail] =useState ("") 
     const [password,setPassword] =useState ("") 
     let navigate = useNavigate();
     const [showError,setShowError] = useState (""); 
     const [imageUpload,setImageUpload] =useState (null) 
-
-
 
 
 
@@ -56,8 +53,7 @@ function Signup() {
         // () =>{
         // console.log("ImageURL", url)
             axios.post(`${baseUrl}/api/v1/signup`, {
-                firstName: firstName,
-                lastName: lastName,
+                fullName: fullName,
                 email:email,
                 password:password,
                 profileImage:null
@@ -113,18 +109,10 @@ function Signup() {
             <div className='content-div'>
                 <h3>Register</h3>
                 <form onSubmit={signUpHandler}>
-                    <div className="names-inp">
-                        <input ref={firstRef} type="text" placeholder="First Name" required onChange={(e) =>{
-                            setFirstName(e.target.value)
+                    <input ref={firstRef} type="text" placeholder="Full Name" required onChange={(e) =>{
+                        setFullName(e.target.value)
 
-                        }} />
-                        <input ref={secondRef} type="text" placeholder="last Name" required onChange={(e) =>{
-                            setLastName(e.target.value)
-
-                        }} />
-
-                    </div>
-
+                    }} />
                     
                     <input ref={thirdRef} className="inp-email" type="email" placeholder="Enter Email" required onChange={(e) =>{
                             setEmail(e.target.value)
