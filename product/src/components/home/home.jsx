@@ -23,7 +23,7 @@ if (window.location.href.split(":")[0] === "http") {
   
 }
 else{
-  baseUrl = "https://sore-teal-chinchilla-sock.cyclic.app/"
+  baseUrl = "https://modern-clam-helmet.cyclic.app/"
 }
 
 

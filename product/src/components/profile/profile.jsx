@@ -26,7 +26,7 @@ if (window.location.href.split(":")[0] === "http") {
   baseUrl = "http://localhost:3000";
 }
 else{
-  baseUrl = "https://sore-teal-chinchilla-sock.cyclic.app/"
+  baseUrl = "https://modern-clam-helmet.cyclic.app/"
 }
 
 function Profile() {
