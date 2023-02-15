@@ -41,9 +41,7 @@ function Account() {
   const [allCategories,setAllCategories] =useState ([]) 
   const [addCategory,setAddCategory] =useState ("") 
   const [isSpinner, setIsSpinner] = useState(null)
-
   const [show2, setShow2] = useState(false);
-
   const updateProfilePhotoHandler= (e) =>{
     
     let imageRef = ref(storage,`profileImages/${imgUpdate?.name + v4()}`);
@@ -109,7 +107,34 @@ e.preventDefault();
         console.log("error in getting all categories", error);
     }
   }
+  const updateFullNameHandler = (event) =>{
+    event.preventDefault();
+    // let update = nameUpdate;
+    // update = update.replace(/\s\s+/g, " ")
+    // update = update.toLowerCase()
+  // setNameUpdate(update) ;
+    console.log(nameUpdate)
+//     let Updatetweet = event?.target?.updateTweetText?.value
+//       axios.put(`${baseUrl}/api/v1/tweet/${editId}`,{
+//       text:Updatetweet ,
+//       
+//     },{withCredentials: true})
+//     .then((response) => {
+//       console.log(response);
+//       setIsSpinner(true)
+//       setLoadTweet(!loadTweet)
+// 
+//       setTimeout(() => {
+//         setIsSpinner(false);
+// 
+//     }, 1500);
+//      
+//     }, (error) => {
+//       console.log(error);
+//     });
 
+    
+  }
   
   const logoutHandler = () =>{
     axios.get(`${baseUrl}/api/v1/logout`,{
@@ -156,13 +181,21 @@ e.preventDefault();
         </div>
         <div className="body">
             <div className="user-image">
-             <img src={(state?.user?.profileImage !== "")?state.user.profileImage:`https://www.pngitem.com/middle/mmhwxw_transparent-user-png-default-user-image-png-png/`} alt="ww" />
+             <img src={(state?.user?.profileImage !== null)?state.user.profileImage:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSGgoEPXteULdfH-flSZKFT5YpRRew1nLDZRja9ItjRVkzIokVa0hPX&usqp=CAE&s"} alt="ww" />
             </div>
             <div id='name-update'>
-                <input type="text" placeholder='Update Full Name'
-                onChange={(e)=>setNameUpdate(e.target.value)}
+                <form onSubmit={updateFullNameHandler}>
+                <input required type="text" placeholder='Update Full Name'
+                onChange={(e)=>{
+                  let val = e.target.value;
+                  val = val.replace(/\s\s+/g, " ");
+                  val = val.toLowerCase();
+                  setNameUpdate(val);
+                  console.log(nameUpdate)
+                }}
                 />
-                <AiOutlineCheck style={{cursor:"pointer"}}/>
+                <button type='submit'><AiOutlineCheck  style={{cursor:"pointer"}}/></button>
+                </form>
             </div>
             <div id="center-div">
                 <div id='img-update'>
@@ -179,9 +212,10 @@ e.preventDefault();
                 </div>
                 <div className="add-cate">
                     <form onSubmit={cagetorgyAddHandler}>
-                    <input required type="text" onChange={(e)=>setAddCategory(e.target.value)} />
-                    <Button type='submit' style={{padding:'2px 5px'}}
-                     variant="success">Add</Button>
+                    <input required type="text" placeholder='Add Category'
+                    onChange={(e)=>setAddCategory(e.target.value)} />
+                    <Button style={{padding:'2px 5px',backgroundColor:"#5cdb35",border:'none'}}
+                     type='submit'>Add</Button>
                     </form>
                 </div>
                 <div className="category-add">

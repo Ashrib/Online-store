@@ -219,7 +219,7 @@ function Admin() {
       <img className="p-img" src={(state?.user?.profileImage !== null)? state?.user?.profileImage : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSGgoEPXteULdfH-flSZKFT5YpRRew1nLDZRja9ItjRVkzIokVa0hPX&usqp=CAE&s"}/>
       </div>
       <div className="user-data">
-         <span className='cap-text'>{state?.user?.firstName} {state?.user?.lastName}</span>
+         <span className='cap-text'>{state?.user?.fullName}</span>
          <span style={{fontSize:"0.9em"}}>{state?.user?.email}</span>
       </div>
     </div>

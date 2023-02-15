@@ -142,7 +142,7 @@ router.get('/productFeed', (req, res) => {
             populate:
             {
                 path: "owner",
-                select: 'firstName lastName email'
+                select: 'fullName email'
             }
         }
         , (err, data) => {

@@ -111,7 +111,7 @@ router.post("/login", (req, res) => {
     // check if user exist
     userModel.findOne(
         { email: body.email },
-        "firstName lastName email password profileImage  ",
+        "fullName email password profileImage  ",
         (err, data) => {
             if (!err) {
                 console.log("data: ", data);
@@ -145,8 +145,7 @@ router.post("/login", (req, res) => {
                                 message: "login successful",
                                 profile: {
                                     email: data.email,
-                                    firstName: data.firstName,
-                                    lastName: data.lastName,
+                                    fullName: data.fullName,
                                     _id: data._id,
 
                                 }
@@ -193,7 +192,7 @@ router.post('/forget-password', async (req, res) => {
         // check if user exist
         const user = await userModel.findOne(
             { email: body.email },
-            "firstName lastName email",
+            "fullName email",
         ).exec()
 
         if (!user) throw new Error("User not found!")
@@ -281,7 +280,7 @@ router.post('/forget-password-via-sms', async (req, res) => {
         // check if user exist
         const user = await userModel.findOne(
             { email: body.email },
-            "firstName lastName email",
+            "fullName email",
         ).exec()
 
         if (!user) throw new Error("User not found")

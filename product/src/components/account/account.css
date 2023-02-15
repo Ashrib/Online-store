@@ -41,8 +41,8 @@
   }
   .user-image{
     border-radius: 50%;
-    height: 60px;
-    width: 60px;
+    height: 70px;
+    width: 70px;
     border: 1px solid gray;
     padding: 2px;
   }
@@ -51,36 +51,44 @@
     height: 100%;
     width: 100%;
   }
-  #name-update>input{
+  #name-update>form>input{
     background-color: transparent;
     border: none;
     border-bottom: 1px solid rgb(120, 120, 120);
   }
-  #name-update>input::placeholder{
+  #name-update>form>input::placeholder{
     color: rgb(120, 120, 120);
   }
   #img-update{
     display: flex;
     justify-content: center;
+    margin-top: 10px;
+    width: 100%;
   }
-  #img-update>form{
+  #img-update>form,#img-update>form>label{
     width: 100%;
   }
   #center-div{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
     width: clamp(200px,90%,500px);
     /* background-color: rgb(234, 34, 34); */
   }
-.add-cate,.add-cate>form{
-  width: 100%;
-  justify-content: center;
-  display: flex;
-}
+  .add-cate,.add-cate>form{
+    width: clamp(230px,80%,80%);
+    justify-content: center;
+    display: flex;
+  }
 .category-box{
   display: flex;
   flex-direction: column;
-  gap: 2px;
-  overflow: scroll;
+  gap: 5px;
+  overflow-y: scroll;
   height: clamp(0px,130px,130px);
+}
+.category-add{
+  width: 100%;
 }
 .categ{
   border: 1px solid rgb(48, 239, 0);
