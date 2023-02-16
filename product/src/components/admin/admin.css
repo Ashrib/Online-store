@@ -38,8 +38,8 @@
 .prf-img{
   border: 1px solid white;
   border-radius: 50%;
-  height: 45px;
-  width: clamp(45px,10%,45px);
+  height: 45px !important;
+  width: 45px !important;
 }
 .p-img{
   height: 100%;
