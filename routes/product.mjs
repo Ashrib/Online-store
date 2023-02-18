@@ -214,41 +214,41 @@ router.delete('/product/:ids', (req, res) => {
     
 })
 
-router.put('/product/:editId', async (req, res) => {
-
-    const body = req.body;
-    const id = req.params.editId;
-
-    if ( // validation
-        !body.text
-     
-    ) {
-        res.status(400).send({
-            message: "required parameters missing"
-        });
-        return;
-    }
-
-    try {
-        let data = await productModel.findByIdAndUpdate(id,
-            {
-                text: body.text,
-              
-            },
-            { new: true }
-        ).exec();
-
-        console.log('updated: ', data);
-
-        res.send({
-            message: "product modified successfully"
-        });
-
-    } catch (error) {
-        res.status(500).send({
-            message: "server error"
-        })
-    }
-})
+// router.put('/product/:editId', async (req, res) => {
+// 
+//     const body = req.body;
+//     const id = req.params.editId;
+// 
+//     if ( // validation
+//         !body.text
+//      
+//     ) {
+//         res.status(400).send({
+//             message: "required parameters missing"
+//         });
+//         return;
+//     }
+// 
+//     try {
+//         let data = await productModel.findByIdAndUpdate(id,
+//             {
+//                 text: body.text,
+//               
+//             },
+//             { new: true }
+//         ).exec();
+// 
+//         console.log('updated: ', data);
+// 
+//         res.send({
+//             message: "product modified successfully"
+//         });
+// 
+//     } catch (error) {
+//         res.status(500).send({
+//             message: "server error"
+//         })
+//     }
+// })
 
 export default router

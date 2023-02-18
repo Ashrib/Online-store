@@ -107,33 +107,33 @@ e.preventDefault();
         console.log("error in getting all categories", error);
     }
   }
-  const updateFullNameHandler = (event) =>{
+  const updateFullNameHandler = async(event) =>{
     event.preventDefault();
-    // let update = nameUpdate;
-    // update = update.replace(/\s\s+/g, " ")
-    // update = update.toLowerCase()
-  // setNameUpdate(update) ;
-    console.log(nameUpdate)
-//     let Updatetweet = event?.target?.updateTweetText?.value
-//       axios.put(`${baseUrl}/api/v1/tweet/${editId}`,{
-//       text:Updatetweet ,
-//       
-//     },{withCredentials: true})
-//     .then((response) => {
-//       console.log(response);
-//       setIsSpinner(true)
-//       setLoadTweet(!loadTweet)
+//     try {
+//       const response = await axios.post(`${baseUrl}/api/v1/fullName/${state?.user?.email}`, {
+//           fullName:nameUpdate
+//       },{withCredentials: true})
+//       console.log("fullname updated", response.data);
 // 
-//       setTimeout(() => {
-//         setIsSpinner(false);
-// 
-//     }, 1500);
-//      
-//     }, (error) => {
-//       console.log(error);
-//     });
-
+//   } catch (error) {
+//       console.log("error in updating fullname", error);
+//   }
     
+
+axios.get(`${baseUrl}/api/v1/fullName/${state?.user?.email}`,{
+  withCredentials: true
+})
+
+.then((response) => {
+  console.log(response);
+  
+  
+}, (error) => {
+  console.log(error);
+});
+
+
+
   }
   
   const logoutHandler = () =>{
@@ -187,11 +187,10 @@ e.preventDefault();
                 <form onSubmit={updateFullNameHandler}>
                 <input required type="text" placeholder='Update Full Name'
                 onChange={(e)=>{
-                  let val = e.target.value;
-                  val = val.replace(/\s\s+/g, " ");
-                  val = val.toLowerCase();
-                  setNameUpdate(val);
-                  console.log(nameUpdate)
+                  e.target.value = e.target.value.replace(/\s\s+/g, " ");
+                  if(e.target.value[0]=== " ") e.target.value = e.target.value.replace(" ", "");
+                  setNameUpdate(e.target.value.toLowerCase());
+                  // console.log(e.target.value.split(" "))
                 }}
                 />
                 <button type='submit'><AiOutlineCheck  style={{cursor:"pointer"}}/></button>

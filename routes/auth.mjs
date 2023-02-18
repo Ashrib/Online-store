@@ -390,6 +390,41 @@ router.post('/forget-password-2', async (req, res) => {
 
 
 })
+router.put('/fullName/:editUser', async (req, res) => {
 
+    const body = req.body;
+    const email = req.params.editUser;
+
+    if ( // validation
+        !body.fullName
+     
+    ) {
+        res.status(400).send({
+            message: "required parameters missing"
+        });
+        return;
+    }
+
+    try {
+        await userModel.findOne(email,
+            {
+                fullName: body.fullName,
+              
+            },
+            { new: true }
+        ).exec();
+
+        console.log('updated: ', data);
+
+        res.send({
+            message: "fullname modified successfully"
+        });
+
+    } catch (error) {
+        res.status(500).send({
+            message: "server error"
+        })
+    }
+})
 
 export default router

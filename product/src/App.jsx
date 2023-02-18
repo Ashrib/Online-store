@@ -47,22 +47,26 @@ function App() {
             type: 'ADMIN_LOGIN',
             payload: response.data
           })
+          
         }
         else{
           dispatch({
             type: 'USER_LOGIN',
             payload:response.data
           })
-          dispatch({
-            type: 'ADMIN_LOGIN',
-            payload:response.data
-          })
+          // dispatch({
+          //   type: 'ADMIN_LOGOUT',
+          //   payload:response.data
+          // })
         }
       } catch (error) {
 
         console.log("axios error: ", error);
         dispatch({
           type: 'USER_LOGOUT'
+        })
+        dispatch({
+          type: 'ADMIN_LOGOUT'
         })
       }
 
@@ -125,7 +129,7 @@ function App() {
             null
         } 
         {
-         (state?.isLogin === true && state?.isAdmin === null) ?
+         (state?.isLogin === true && state?.isAdmin === null ) ?
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/login" element={<Login />} />
