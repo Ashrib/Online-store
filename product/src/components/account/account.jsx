@@ -172,7 +172,7 @@ axios.get(`${baseUrl}/api/v1/fullName/${state?.user?.email}`,{
             <Spinner animation="grow" variant="danger" />
             </div>
         </div>
-    <div className='body-div'>
+    <div id='body-div'>
         <span style={{fontSize:"1.7em"}}>
             <Link to="/"><MdOutlineKeyboardBackspace title='home'/></Link>
         </span>

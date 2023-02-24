@@ -265,12 +265,12 @@ function Admin() {
                   <div className='form-inp'>
                     Unit Name: 
                     <input type="text" placeholder='Pcs/kg/dozen' 
-                    onChange={(e) =>setUnitName(e.target.value)}
+                    onChange={(e) =>setUnitName(e.target.value)} required
                     />
                   </div>
                   <div className='form-inp'>
                     Unit Price: 
-                    <input type="number" placeholder='Rs.100' 
+                    <input required type="number" placeholder='Rs.100' 
                     onChange={(e) =>setUnitPrice(e.target.value)}
                     />
                   </div>
@@ -279,11 +279,6 @@ function Admin() {
           </div>
           
         </Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
-            Close
-          </Button>
-        </Modal.Footer>
       </Modal>
       </div>
     </div>
