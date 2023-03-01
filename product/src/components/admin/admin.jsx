@@ -160,7 +160,6 @@ function Admin() {
     if (e.target.value == "") {
       descEmptyError.style.display = "block"
       descError.style.display = "none"
-
     }
 
     else{
@@ -219,7 +218,7 @@ function Admin() {
       <img className="p-img" src={(state?.user?.profileImage !== null)? state?.user?.profileImage : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSGgoEPXteULdfH-flSZKFT5YpRRew1nLDZRja9ItjRVkzIokVa0hPX&usqp=CAE&s"}/>
       </div>
       <div className="user-data">
-         <span className='cap-text'>{state?.user?.fullNamep}</span>
+         <span className='cap-text'>{state?.user?.fullName}</span>
          <span style={{fontSize:"0.9em"}}>{state?.user?.email}</span>
       </div>
     </div>
@@ -255,7 +254,16 @@ function Admin() {
                <input type="text" placeholder='Enter item name' required
                onChange={(e) =>setItemName(e.target.value)} 
                />
-               <select name="" id=""></select>
+               <label for="categories">Choose a car:</label>
+               <select name="categories" id="categories">Select Category
+                {(allCategories.length >0)?
+                  allCategories.map(val=>{
+                    <option value={val.name}>{val.name}</option>
+                  })
+                :null}
+                
+               </select>
+               {/* <span>{allCategories.map(val=>val.name)}</span> */}
                <textarea style={{resize:"none"}} 
                 rows={3} placeholder="describe the new item"
                  required maxLength={500} 
