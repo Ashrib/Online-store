@@ -255,11 +255,14 @@ function Admin() {
                onChange={(e) =>setItemName(e.target.value)} 
                />
                <label for="categories">Choose a car:</label>
-               <select name="categories" id="categories">Select Category
+               <select name="categories" id="categories" onChange={(e)=>{
+                console.log(e.target.value)
+               }}>
+                <option value="">Select Category</option>
                 {(allCategories.length >0)?
-                  allCategories.map(val=>{
+                  allCategories.map((val)=>(
                     <option value={val.name}>{val.name}</option>
-                  })
+                  ))
                 :null}
                 
                </select>
