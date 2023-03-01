@@ -38,13 +38,11 @@ function Admin() {
   const [allData,setAllData] =useState ([]) 
   const [allCategories,setAllCategories] =useState ([]) 
   const [show, setShow] = useState(false);
-  const [editId,setEditId] =useState (null) 
-  const [searchId,setSearchId] =useState (null) 
+  const [formValidate,setFormValidate] =useState (false) 
   
   const [searchData,setSearchData] =useState ("") 
   const [show1, setShow1] = useState(false);
 
-  // const handleClose = () => setShow1(false);
   const [loadTweet, setLoadTweet] = useState(false)
   const [isSpinner, setIsSpinner] = useState(null)
   const firstRef = useRef(null);
@@ -58,7 +56,6 @@ function Admin() {
   const [itemDescription,setItemDescription] =useState ("") 
   const [unitPrice,setUnitPrice] =useState (null) 
   const [eof, setEof] = useState(false)
-
 
   // add modal
   const handleClose = () => setShow(false);
@@ -266,7 +263,6 @@ function Admin() {
                 :null}
                 
                </select>
-               {/* <span>{allCategories.map(val=>val.name)}</span> */}
                <textarea style={{resize:"none"}} 
                 rows={3} placeholder="describe the new item"
                  required maxLength={500} 
